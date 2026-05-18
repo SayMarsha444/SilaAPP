@@ -37,26 +37,26 @@
         <section class="section">
             <div class="container">
                 <h1>Ajukan Layanan Akademik</h1>
-                <p class="section-desc"><em> lengkapi form dibawah untuk mengajukan layanan akademik anda </em>
-                </p>
+                <p class="section-desc"><em> lengkapi form dibawah untuk mengajukan layanan akademik anda </em></p>
 
-                <form action="#" target="_blank" method="post">
+                <form action="#" target="_blank" method="post" class="form-card">
                     <fieldset>
                         <legend> Data Pengajuan </legend>
 
                             <div class="form-group">
                                 <label>Nama Lengkap</label>
-                                <input type="text">
+                                <input type="text" id="name" required>
+
                             </div>
 
                             <div class="form-group">
                                 <label for="nim">NIM</label>
-                                <input type="text" id="nim">
+                                <input type="text" id="nim" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="prodi">Program studi</label>
-                                    <select id="prodi" name="prodi">
+                                    <select id="prodi" name="prodi" required>
                                         <option value="#">~~Pilih Program Studi~~</option> 
                                         <option value="Sistem informasi">Sistem Informasi</option>
                                         <option value="Teknik Informatika">Teknik Informatika</option>
@@ -68,9 +68,9 @@
                             </div>
 
                             <div>
-                                <div class="form-group">
-                                    <label for="jenis">Jenis layanan</label>
-                                    <select id="jenis" name="jenis">
+                            <div class="form-group">
+                                <label for="jenis">Jenis layanan</label>
+                                    <select id="jenis" name="jenis" required>
                                         <option value="#">~~Pilih jenis layanan~~</option> 
                                         <option value="SKA">SKA - surat aktif kuliah</option>
                                         <option value="CAK">CAK - cuti akademik</option>
@@ -78,8 +78,9 @@
                                         <option value="PDA">PDA - Perubahan data</option>
                                     </select>
                                 </div>
+                            </div>
 
-                                <div class="form-group">
+                            <div class="form-group">
                                     <label for="tanggal">Tanggal Pengajuan</label>
                                     <input type="date" id="tanggal" name="tanggal">
                                 </div>
@@ -87,10 +88,12 @@
 
                             <div class="form-group">
                                 <label for="keterangan">keterangan</label>
-                                <input type="text" id="keterangan">
+                                <textarea type="text" id="keterangan" rows="3"></textarea>
                             </div>
 
-                            <div class=""></div>
+                            <div class="form-action">
+                                <button type="submit">Submit</button>
+                            </div>
                     </fieldset>
                 </form>
 
