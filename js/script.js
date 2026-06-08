@@ -1,79 +1,158 @@
-// minggu 12
-// var, fungsi, validasi sederhana
+/* ================================
+   JAVASCRIPT LANJUTAN — SILA
+   DOM, Event Handling, CRUD, localStorage
+   ================================ */
 
-// variabel const (layanan.html)
-const layanan = ['SKA', 'CAK', 'PDA', 'TNM']
+// ════════════════════════════════
+// DATA LAYER (localStorage)
+// localStorage adalah penyimpanan data di browser
+// Data tidak hilang meskipun: halaman di-refresh, browser ditutup
+// yang bertahan meskipun halaman ditutup/refresh.
+// Data disimpan sebagai string JSON.
+// Alur: Array → JSON → localStorage
+// ════════════════════════════════
 
-// tanggal (fungsi format)
-// dd-mm-yyyy 
-// gunakan objek bawaan dari js
-
-function formattanggal (dateStr) {
-    // formating
-    const bulan = ['jan', 'feb', 'mar', 'apr', 'mei', 'jun', 'jul', 'aug', 'sept', 'okt', 'nov', 'des']
-    const d = new Date(dateStr); 
-    // deklarasi new date
-
-    // format (tgl, bln, thn)
-    return d.getDate() + ' ' + bulan[d.getMonth()] + ' ' + d.getFullYear()
+// membaca data dari lokal storage
+function getdata() {
+    const raw = localStorage.getItem('sila_data');
+    // jika datanya ada, parse 350% --> array; jika data tidak ada, kembalikan data array yang kosong.
+    return raw ? JSON.parse(raw) : [];
 }
 
-// validasi form
-function validasiform() {
-    // 1. get value
-    const namalengkap = document.getElementById('namalengkap').value;
-    const nim = document.getElementById('nim').value;
-    const prodi = document.getElementById('prodi').value;
-    const layanan = document.getElementById('layanan').value;
-    const tanggal = document.getElementById('tanggal').value;
-    const keterangan = document.getElementById('keterangan').value;
-    
+// 2. menyimpan kembali data ke local storage setelah dibaca (array --> json)
+function savedata() {
+    localStorage.setItem('sila_data', JSON.stringify(data));
+}
 
-    // alert(namalengkap)
-    // alert(nim)
-    // alert(prodi)
-    // alert(layanan)
-    // alert(tanggal)
-    // alert(keterangan)
+// format tanggal (dd-mm-yyyy):
+function formattanggal(datastr) {
+    const bulan = [
+        'januari','februari','maret','april', 'mei','juni','juli','agustus','september','oktober','november', 'desember'
+    ];
 
-    // console.log(namalengkap)
+    const d = new Date(datastr);
+    return d.getDate() +' ' + bulan[d.getMonth()] + ' ' + d.getFullYear();
+}
 
-    // 2. validasi, cek field yang kosong
-    if(namalengkap === '' || nim === '' || prodi === '' || layanan === '' || tanggal === '' || keterangan === '') {
-        alert('❌isi semuanya, wajib ma preen!!');
+// form handling
+// menangani form pengajuan; mode tambah dan mode edit berdasarkan parameter url
 
-        // mencegah submit halaman (padahal isinya kosong jieers)
-        return false;
+function initform() {
+    const form = document.getElementById('formpengajuan');
+    if (!form) return; 
+    // jila halaman ga punya form, keluar
+
+    // deteksi mode edit atau tidak?
+    // jika parameter url edit ditemukan, maka data lama ditampilkan. jika tidak maka adalah mode tambah (create)
+
+    const editid = urlParams.get('edit');
+    let editmode = false;
+
+    if(editid){
+        // cari item yang akan diedit berdasarkan ID
+        const data = getdata();
+        const itemtoedit = data.find(function(item) {
+            return item.id == editid;
+        });
+
+        // edit.data
+        if(itemtoedit) {
+            editmode = true; 
+            // mode edit aktif
+            // mengisi field form dengan data yang ada (pre-fill)
+
+            document.getElementById('nama').value = itemtoedit.nama || '';
+            document.getElementById('nim').value = itemtoedit.nim || '';
+            const prodiEl = document.getElementById('prodi');
+            if (prodiEl && itemtoedit.prodi) prodiEl.value = itemtoedit.prodi || ''
+            const layananEl = document.getElementById('layanan');
+            if (layananEl && itemtoedit.layanan) layananEl.value = itemtoedit.layanan || ''
+            document.getElementById('tanggal').value = itemtoedit.tanggal || '';
+            document.getElementById('keterangan').value = itemtoedit.keterangan || '';
+
+            // ubah teks tombol --> "simpan perubahan"
+            const btnsubmit = form.querySelector('button[type="submit"]');
+            if (btnsubmit) btnsubmit.innerHTML = '✏️simpan perubahan'
+        }
     }
 
-    // batasi jumlah harus 8 karakter (nim)
-    if(nim.length !== 8 || isNaN(nim)) {
-        alert('❌harus 8 karakter preeen, gaboleh 2, 1, 5, 0');
-        return false;
-    }
+    // simpan (submit create)
+    // menggunakan event listener untuk submit form (eventnya 'submit')
+    // sebelum submit, form akan melakukan validasi
+    // saat tombol ajukan di klik; 1. ambil data dari form, 2. validasi data. 3. simpan data. 4.lalu dipindahkan ke halaman riwayat
+    //struktur.addeventlistener('event' function())
+    form.addEventListener('submit', function(e){
+        // cegah form reload
+        e.preventDefault();
+        // 1. ambil semua nilai di field (cara: panggil get elemen id)
+        const nama = document.getElementById('nama').value.trim();
+        const nim = document.getElementById('nim').value.trim();
+        const prodi = document.getElementById('prodi').value.trim();
+        const layanan = document.getElementById('layanan').value.trim();
+        const tanggal = document.getElementById('tanggal').value.trim();
+        const keterangan = document.getElementById('keterangan').value.trim();
+        const errorEl = document.getElementById('formerror').value.trim();
 
-    // tampilkan hasil jika berhasil validasi
-    // di console
-    console.log("Data pengajuan berhasil: ",{
-        namalengkap: namalengkap,
-        nim: nim,
-        prodi: prodi,
-        layanan: layanan,
-        tanggal: formattanggal(tanggal),
-        keterangan: keterangan
+        errorEl.textcontent = ''; 
+        // reset pesan error sebelum divalidasi
+        
+        // validasi form (semua data wajib diisi)
+        if (!nama || !nim || !prodi || !layanan || !tanggal) {
+            errorEl.textcontent = '❌semua field harus diisi'
+            return;
+            // hentikan eksekusi jika ga valid
+        }
+
+        // nim harus 8 karakter
+        if (nim.length !== 8 || isNaN(nim)) {
+            errorEl.textcontent = '❌nim harus 8 digit angka!'
+            return;
+        }
+
+        // --crud-- (create and update)
+        const data = getdata();
+        if(editmode) {
+            for (let i=0; i< data.length; i++){
+                // jika ide sama dengan edit id maka mode edit (timpa data)
+                if (data[i].id == editid) {
+                    data[i].nama == nama;
+                    data[i].nim == nim;
+                    data[i].prodi == prodi;
+                    data[i].layanan == layanan;
+                    data[i].tanggal == tanggal;
+                    data[i].keterangan == keterangan
+                    break;
+                }
+            }
+        }
+
+        else{
+            // create: buat data objek yang baru
+            const item = {
+                id: Date.now(), 
+                // timestamp dalam milidetik sebagai ID
+                nama: nama,
+                nim: nim,
+                prodi: prodi,
+                layanan: layanan,
+                tanggal: tanggal,
+                keterangan: keterangan,
+            };
+            data.push() 
+            // tambah data ke array
+        }
+        savedata(data);
+        // simpan ke local storage
+        form.reset();
+        errorEl.textcontent = '';
+        alert(editid ? '💯perubahan berhasil disimpan!' : '💯pengajuan berhasil disimpan!')
+        window.location.href = 'riwayat.html' 
+        // pindah halaman
     });
-
-    // di alert
-    alert("data pengajuan berhasil: " +
-        'nama lengkap' + namalengkap + '\n' +
-        'nim' + nim, + '\n' +
-        'prodi' + prodi, + '\n' +
-        'layanan' + layanan + '\n' +
-        'tanggal' + formattanggal(tanggal), + '\n' +
-        'keterangan' + keterangan
-    );
-
-    return false;
-
-
+    
 }
+
+// INIT (initialisasi)
+document.addEventListener('DOMContentLoaded', function () {
+    initform();
+})

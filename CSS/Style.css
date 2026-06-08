@@ -710,9 +710,10 @@ legend {
 
 /* responsive */
 @media (max-width: 760px) {
-    .data-table (font-size: 0.8rem;)
+    .data-table 
     .data-table th,
     .data-table td {
         padding: 8px 10px;
+        font-size: 0.8rem;
     }
 }
