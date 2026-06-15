@@ -1,0 +1,719 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;  /* Box-sizing: membuat supaya lebar sudah mencakup margin dan padding */
+}
+
+/* Mengatur background dan warna tulisan */
+
+body {
+    background-color: #0f172a;
+    color: #e2e8f0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    line-height: 1,6;
+    padding-top: 60px;
+}
+
+
+h1, h2, h3 {
+    color: #f1f5f9;
+}
+
+/* atur link */
+
+a {
+    color: #60a5fa;
+    text-decoration: none;
+}
+
+/* Memberikan warna pada link */
+
+a:hover {
+    color: #93c5fd;
+    background-color: #e2e8f0;
+    text-decoration: double;
+}
+
+hr {
+    border: none;
+}
+
+/* Mengatur ketebala font untuk setiap level judul: rem-relatif terhadap font-size root (biasanya 1 rem 16px) font weight 700 = tebal (bold) */
+h1 {
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+h2 {
+    font-size: 1,5rem;
+    /* 24px */
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+h3 {
+    font-size: 1,1rem;
+    /* 17,6px */
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+/* header 
+margin : menambah ruang
+padding : menambah ruang (luar) */
+
+/* header */
+
+header {
+    padding: 24px; 
+    /* ruang dalam*/
+    border-bottom: 1px solid #334155;
+}
+
+.subtitle {
+    color: #94a3b8;
+    font-size: 0,875px;
+    margin-bottom: 12px;
+}
+
+/* atur menu / link */
+
+nav a {
+    margin-left: 10px;
+}
+
+/* mengatur link yang sedang aktif */
+
+nav a.aktif {
+    color: #f1f5f9;
+    font-weight: 600;
+}
+
+/* konten hero, area utama halaman, berada ditengah halaman padding sedikit lebih luas/besar */
+.Hero{
+    color: #94a3b8;
+    padding: 48px 24px;
+    text-align: center;
+}
+
+.Hero h2 {
+    font-size: 1.75rem;
+    margin-bottom: 12px;
+
+}
+
+.Hero p {
+    color: #94a3b8;
+    margin-bottom: 12px;
+}
+
+/* layanan
+Section: blok konten dengan garis atas sebagai pemisah */
+
+.section {
+    padding: 32px 24px;
+    border-top: 1px solid #334155;
+}
+
+.section-desc {
+    color: #94a3b8;
+    margin-bottom: 16px;
+}
+
+/* card : konten berbasis kartu */
+.card {
+    background-color: #1e293b;
+    padding: 16px;
+    margin-bottom: 12px;
+    border-radius: 15px;
+    /* border radius = sudut melengkung */
+
+    transition: border-color 0.3s, transform 0,2s;
+}
+
+.card:hover{
+    border-color: #475569;
+    transform: translateY(-2px);
+    /* melayang sedikit */
+}
+
+.card p {
+    font-size: 0.9rem;
+    color: #6d7176;
+}
+
+/* list atau daftar */
+
+ol, ul {
+    padding-left: 1.5rem;
+}
+
+li {
+    margin-bottom: 8px;
+    color: #6d7176;
+}
+
+li strong {
+    color: #f1f5f9;
+}
+
+/* footer */
+footer {
+    padding: 24px;
+    border-top: 1px solid #334155;
+    text-align: center;    
+    font-size: 0.875rem;
+    color: #6d7176;
+}
+
+footer, p {
+    margin-bottom: 8px;
+}
+
+/* membatasi lebar konten max 1000px */
+.container{
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+    /* ruang kiri & kanan */
+}
+
+/* navbar (menggunakan flexbox {mengatur elemen anak secara baris}) */
+
+.navbar{
+    background-color: #1e293b;
+    border-bottom: 1px solid #334155;
+    padding: 16px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    /* selalu berada di paling atas lapisan */
+}
+
+.navbar-inner{
+    display: flex;
+    /* aktifkan flexbox */
+    justify-content: space-between;
+    /* logo & menu berjauhan */
+    align-items: center;
+
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #f1f5f9;
+}
+
+.nav a {
+    margin-left: 16px;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.nav a:hover,
+nav a.active{
+    color: #f1f5f9;
+}
+
+/* bagian awal halaman, dibuat mencolok. selain itu styling button */
+
+.hero {
+    padding: 64px 0;
+}
+
+.hero h1{
+    font-size: 2.25rem;
+    /* 36px */
+    margin-bottom: 16px;
+}
+
+.hero p {
+    color: #94a3b8;
+    margin-bottom: 24px;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    /* transisi */
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+
+}
+
+.btn-primary {
+    background-color: #2563eb;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #1e4fba;
+    color: #fff;
+}
+
+.btn-outline {
+    background-color: #1e293b;
+    color: #f1f5f9;
+    border: 1px solid #334155;
+}
+
+.btn-outline:hover {
+    background-color: #394e70;
+    color: #f1f5f9;
+    border: 1px solid #334155;
+}
+
+/* daftar layanan */
+/* card grid */
+
+.card-grid {
+    display: grid;
+    /* mengaktifkan grid */
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+
+}
+
+.section {
+    padding: 48px 0;
+    border: 1px solid #334155;
+}
+
+.card-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #60a5fa;
+    background-color: rgba(37, 99, 235, 0.1);
+    padding: 2px 8px;
+    border-radius: 6px;
+}
+
+/* cara mengajukan */
+
+.step-grid {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.step {
+    flex: 1;
+    text-align: center;
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 24px 16px;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    background-color: #2563eb;
+    color: #f1f5f9;
+    border-radius: 50%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto 12px;
+}
+
+.step p {
+    color: #94a3b8;
+    font-size: 0.85rem;
+}
+
+/* --------------------------------
+   Stats Grid — Flexbox
+   Untuk menampilkan statistik angka
+   secara berdampingan.
+   -------------------------------- */
+.stats-grid {
+    display: flex;
+    gap: 16px;
+}
+
+.stat {
+    flex: 1;
+    text-align: center;
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 24px;
+}
+
+/* Angka statistik besar berwarna biru */
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #60a5fa;
+}
+
+.stat-label {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
+/* --------------------------------
+   Footer — menggunakan CSS Grid
+   grid-template-columns: 2fr 1fr →
+   kolom kiri 2x lebih lebar dari kolom kanan
+   (2/3 vs 1/3 lebar total).
+   -------------------------------- */
+.footer {
+    border-top: 1px solid #334155;
+    margin-top: 32px;
+}
+
+.footer-inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    /* 2 kolom tidak sama */
+    gap: 32px;
+    padding: 32px 0;
+}
+
+.footer-inner p {
+    color: #64748b;
+    font-size: 0.875rem;
+    margin-top: 8px;
+}
+
+.footer-inner h4 {
+    color: #f1f5f9;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+/* Link di footer tampil sebagai block (baris baru per link) */
+.footer-inner a {
+    display: block;
+    color: #64748b;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+}
+
+.footer-inner a:hover {
+    color: #93c5fd;
+}
+
+/* Baris paling bawah footer (copyright) */
+.footer-bottom {
+    border-top: 1px solid #334155;
+    padding: 16px 0;
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+/* STRUKTUR NAVIGASI dan MENU */
+/* =========================== */
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+}
+
+.nav-menu li a {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+.nav-menu li a :hover {
+    color: #f1f5f9;
+    background-color: rgba(37, 99, 235, 0.1);
+}
+
+.footer-nav ul {
+    list-style: none;
+
+}
+
+.footer-nav ul li {
+    margin-bottom: 4px;
+}
+
+.footer-nav ul li a {
+    color: #1e293b;
+    font-size: 0.85rem;
+}
+
+.footer-nav ul li a:hover {
+    color: #9eabbd;
+}
+
+.navtoggle {
+    display: none;
+}
+
+.list-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.list-hamburger span {
+    display: block;
+    width: 24px;
+    height: 4px;
+    background-color: #f1f5f9;
+    border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+    .navbar-inner{
+        flex-wrap: wrap;
+        /* bungkus jika tidak muat */
+    }
+
+    .list-hamburger{
+        display: flex;
+    }
+
+    nav{
+        width: 100%;
+        order: 3;
+    }
+
+    /* menu disembunyikan */
+
+    .nav-menu {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    padding: 8px 0;
+    border-top: 1px solid #334155;
+    margin-top: 12px;
+    }
+
+    .nav-menu li a {
+    display: block;
+    padding: 10px 0;
+    border-radius: 0;
+    }
+
+    .navtoggle:checked~nav .nav-menu {
+    display: flex;
+    }
+
+    /* M07 */
+    .nav-menu {
+        gap: 4px;
+    }
+
+    .hero h1{
+        font-size: 1.5rem;
+        /* dari 2.25rem ke 1.5rem */
+    }
+
+    /* tombol berubah jadi vertikal */
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* card: dari 2 kolom jadi 1 kolom */
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* step dan statistik berubah menjadi vertikal */
+    .step-grid {
+        flex-direction: column;
+    }
+
+    .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        text-align: center;
+    }
+}
+
+/* responden layar - ukuran layar kecil <= 480px => phone */
+/* judul lebih kecil, tombol lebar 100% */
+@media (max-width:480px) {
+    .hero h1 {
+        font-size: 1.25rem;
+    }
+
+    .btn {
+        width: 100;
+        text-align: center;
+    }
+}
+
+/* animasi : section hero */
+/* animasi fade in */
+/* from : tersembunyi, geser kebawah
+to : posisi normal */
+
+@keyframes fadein {
+    from{
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* section beranda */
+.hero {
+    animation: fadein 0.6s ease;
+}
+
+.form-card {
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+fieldset {
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 24px;
+    background-color: #1e293b;
+}
+
+legend {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    padding: 0.8px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width: 100%;
+    padding: 10px 14px;
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    color: #e2e8f0;
+    font-size: 0.9 rem;
+    font-family: inherit;
+    outline: none;
+    transition: border color 0.3s;
+}
+
+/* saat diklik (focus): layarnya biru terang */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color: #2563eb;
+}
+
+.form-rpw {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.form-actions .btn {
+    cursor: pointer;
+    border: none;    
+    font-family: inherit;
+}
+
+.form-actions .btn-outline {
+    border: 1px solid #334155;
+    background: none;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    min-width: 600px;
+}
+
+.data-table caption {
+    text-align: left;
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 12px;
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #334155;
+}
+
+/* zebra stripes */
+.data-table th {
+    background-color: #1e293b;
+    color: #e2e8f0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5;
+}
+
+.data-table td {
+    color: #97a3b4;
+    font-size: 0.9rem;
+}
+
+.data-table tbody tr:nth-child(even) {
+    background-color: rgba(37, 41, 59, 0.8);
+}
+
+/* hover */
+.data-table tbody tr:hover {
+    background-color: #1e252f;
+}
+
+/* responsive */
+@media (max-width: 760px) {
+    .data-table 
+    .data-table th,
+    .data-table td {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+    }
+}
