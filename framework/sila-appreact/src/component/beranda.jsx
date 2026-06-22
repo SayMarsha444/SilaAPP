@@ -1,29 +1,15 @@
-function App() (
-    const [halamanAktif, setHalamanAktif] = useState("Beranda");
-    const [dataRiwayat, setDataRiwayat] = useState([]);
-      useEffect(() => {
-        const memoriLokal = localStorage.getItem("sila_data_react");
-        if (memoriLokal) {
-          setDataRiwayat(JSON.parse(memoriLokal));
-        }
-      }, []);
-    
-      // fungsi menyimpan data ke state dan localStorage
-      const simpanData = (dataBaru) => {
-        setDataRiwayat(dataBaru);
-        localStorage.setItem("sila_data_react", JSON.stringify(dataBaru));
-      };
-        
-         <>
+function Beranda() {
+    return (
+        <>
             <section className="hero">
               <div className="container">
-
+ 
                 <h1>
                   Sistem Informasi
                   <br />
                   Layanan Akademik
                 </h1>
-
+ 
                 <p>
                   Ajukan layanan akademik Anda dengan mudah dan pantau prosesnya
                   secara real-time.
@@ -31,7 +17,7 @@ function App() (
                   Tanpa antri, tanpa ribet.
                 </p>
                 <div className="hero-buttons">
-
+ 
                   <button
                     className="btn btn-primary"
                     onClick={() =>
@@ -51,7 +37,7 @@ function App() (
                 </div>
               </div>
             </section>
-
+ 
             {/* <!-- Daftar Layanan --> */}
             <section class="section">
               <div class="container">
@@ -81,7 +67,7 @@ function App() (
                 </div>
               </div>
             </section>
-
+ 
             {/* <!-- Cara Mengajukan --> */}
             <section class="section">
               <div class="container">
@@ -106,7 +92,7 @@ function App() (
                 </div>
               </div>
             </section>
-
+ 
             {/* <!-- Statistik --> */}
             <section class="section">
               <div class="container">
@@ -126,6 +112,9 @@ function App() (
                 </div>
               </div>
             </section>
-          </>
-
-        
+        </>
+    );
+}
+ 
+export default Beranda;
+ 
